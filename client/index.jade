@@ -1,0 +1,14 @@
+head
+  link(rel="stylesheet"
+       href="http://fonts.googleapis.com/css?family=Fontdiner+Swanky|Syncopate:700|Ubuntu"
+       type="text/css")
+  title SteezTest.me
+
+
+template(name="loggedInLayout")
+  .container
+    +loginButtons(align="right")
+    +yield
+
+template(name="dashboard")
+  h1 dashboard

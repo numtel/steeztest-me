@@ -1,0 +1,85 @@
+#welcome-login {
+  position:fixed;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+
+  >.container {
+    position:relative;
+  }
+
+  #login-dropdown-list {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    list-style: none;
+    >a {
+      display: inline-block;
+      padding: 7px 10px;
+      border-radius: 10px;
+      background: #f5f5f5;
+    }
+    >.dropdown-menu {
+      left: auto;
+      right: 0;
+    }
+  }
+}
+
+#welcome-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: #f5f5f5;
+  text-align: center;
+  background: linear-gradient(98deg, #649173, #DBD5A4);
+  background-size: 400% 400%;
+
+  -webkit-animation: welcomeHeaderAnim 30s ease infinite;
+  -moz-animation: welcomeHeaderAnim 30s ease infinite;
+  animation: welcomeHeaderAnim 30s ease infinite;
+
+  @-webkit-keyframes welcomeHeaderAnim {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+  }
+  @-moz-keyframes welcomeHeaderAnim {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+  }
+  @keyframes welcomeHeaderAnim { 
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+  }
+
+  h1 {
+    font-family: "Fontdiner Swanky";
+    font-size: 72px;
+    line-height: 90px;
+    display: inline-block;
+    border-bottom: 4px solid #60826C;
+    text-shadow: 0px -1px 0px #60826C;
+  }
+  h2 {
+    font-family: "Syncopate";
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 50px;
+    margin: 0;
+    text-shadow: 0px -1px 0px #60826C;
+  }
+
+
+}
+
+#welcome-footer {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 100%;
+  background: url(drop-shadow-1.png) repeat-x top center #fff;
+}
