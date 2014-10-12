@@ -1,0 +1,7 @@
+template(name="modify")
+  h1 modifyin
+  +quickForm(collection="CssTests" id="insert-test-form" type="insert")
+  each tests
+    li #{val}
+  a(class="btn btn-default" href="{{pathFor route='home'}}")
+    | Cancel

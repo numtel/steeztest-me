@@ -1,0 +1,33 @@
+#error-page {
+  background: linear-gradient(270deg, #ff8008, #ffc837);
+  background-size: 400% 400%;
+
+  -webkit-animation: errorPageAnim 30s ease infinite;
+  -moz-animation: errorPageAnim 30s ease infinite;
+  animation: errorPageAnim 30s ease infinite;
+
+  color: #fff;
+  text-shadow: 0 -1px 0 #E37914;
+  text-align: center;
+
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  @-webkit-keyframes errorPageAnim {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+  }
+  @-moz-keyframes errorPageAnim {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+  }
+  @keyframes errorPageAnim { 
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+  } 
+}
