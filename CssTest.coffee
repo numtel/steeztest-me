@@ -1,7 +1,7 @@
 @CssTest = (doc) ->
   _.extend this, doc
 
-CssTest.prototype.duplicate = ->
+CssTest.prototype.duplicate = (callback) ->
   self = this
   schema = CssTests.simpleSchema().schema()
   newDoc = {}
@@ -10,10 +10,10 @@ CssTest.prototype.duplicate = ->
       newDoc[fieldName] = self[fieldName]
   newDoc.title += ' (Copy)'
   CssTests.insert newDoc, (error, _id) ->
-    throw error if error
-    Router.go 'test.details', {_id: _id}
+    callback? error, _id
 
-CssTest.prototype.remove = ->
+CssTest.prototype.remove = (callback) ->
   self = this
   #TODO Meteor.call 'clearDependents', self._id
-  CssTests.remove self._id
+  CssTests.remove self._id, (error) ->
+    callback? arguments

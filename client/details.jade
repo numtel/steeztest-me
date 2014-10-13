@@ -17,8 +17,7 @@ template(name="detailsHeader")
                 a.duplicate(href='#') Duplicate
               li.divider
               li
-                a(href='#' data-toggle='modal' data-target='#delete') Delete...
-      +delete(test=this)
+                a.delete(href='#') Delete...
       h1= title
       if description
         p= description
