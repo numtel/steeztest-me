@@ -1,8 +1,11 @@
 Template.list.cases = ->
-  return CssTests.find {}, {
-    fields: {title: 1, lastPassed: 1, hasNormative: 1}
-    sort: {rank: 1}
-  }
+  return CssTests.find {},
+    fields:
+      title: 1
+      lastPassed: 1
+      hasNormative: 1
+    sort:
+      rank: 1
 
 Template.list.empty = ->
   return Template.list.cases().count() == 0
@@ -16,11 +19,12 @@ Template.list.active = ->
     return true
 
 Template.list.rendered = ->
-  @$('ul.nav').sortable {
-    handle: 'a',
+  @$('ul.nav').sortable
+    handle: 'a'
     stop: (event, ui) ->
       ui.item.parent().children().each (i) ->
         item = $(this)
         id = item.children('a').attr('data-id')
-        CssTests.update(id, {$set: {rank: i}})
-  }
+        CssTests.update id,
+          $set:
+            rank: i

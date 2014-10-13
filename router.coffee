@@ -20,23 +20,24 @@ loggedIn = (loggedOut) ->
   else
     # Nothing else, error!
     setTitle 'Error'
-    this.render 'error', {data: 'Must be logged in to continue.'}
+    this.render 'error',
+      data: 'Must be logged in to continue.'
     return false
 
-homeRoute = () ->
+homeRoute = ->
   setTitle()
   if loggedIn.call this, 'welcome'
     this.render 'dashboard'
-Router.route '/', homeRoute, {name: 'home'}
+Router.route '/', homeRoute,
+  name: 'home'
 
-testCreateRoute = () ->
+testCreateRoute = ->
   if loggedIn.call this
     setTitle this.route.options.title
     this.render 'modify'
-Router.route '/create', testCreateRoute, {
+Router.route '/create', testCreateRoute,
   name: 'test.create',
   title: 'Create New Test'
-}
 
 testRoute = (template) ->
   return ->
@@ -48,14 +49,12 @@ testRoute = (template) ->
       else
         setTitle _.template this.route.options.title, testCase
         this.render template, {data: {test: testCase}}
-Router.route '/case/:_id', testRoute('details'), {
+Router.route '/case/:_id', testRoute('details'),
   name: 'test.details',
   title: '<%= title %>'
-}
-Router.route '/case/:_id/edit', testRoute('modify'), {
+Router.route '/case/:_id/edit', testRoute('modify'),
   name: 'test.modify',
   title: 'Modifying "<%= title %>"'
-}
 
 if Meteor.isClient
   Meteor.startup ()->

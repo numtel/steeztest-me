@@ -1,112 +1,98 @@
-@CssTests = new Meteor.Collection 'CssTests', {
+@CssTests = new Meteor.Collection 'CssTests',
   transform: (doc) ->
     return new CssTest doc
-}
 
-CssTests.attachSchema new SimpleSchema {
-  title: {
+CssTests.attachSchema new SimpleSchema
+  title:
     type: String,
     label: 'Title',
     max: 200
-  },
-  description: {
+  description:
     type: String,
     label: 'Description',
     optional: true,
     max: 5000,
-    autoform: {rows: 5}
-  },
-  interval: {
+    autoform:
+      rows: 5
+  interval:
     type: Number,
     label: 'Schedule Interval',
     optional: true,
     min: 1
-  },
-  remoteStyles: {
+  remoteStyles:
     type: String,
     label: 'Remote Styles',
     optional: true,
     max: 300
-  },
-  cssFiles: {
+  cssFiles:
     type: String,
     label: 'CSS Files',
     max: 1000,
     optional: true,
-    autoform: {rows: 8}
-  },
-  testUrl: {
+    autoform:
+      rows: 4
+  testUrl:
     type: String,
     label: 'Test URL',
     optional: true,
     max: 300
-  },
-  widths: {
+  widths:
     type: String,
     label: 'Test Viewport Widths',
     max: 200,
     defaultValue: '1024',
-    custom: () ->
-      if !/^[0-9,\s]+$/.test this.value
-        return 'notAllowed'
-  },
-  fixtureHtml: {
+    regEx: /^[0-9,\s]+$/
+  fixtureHtml:
     type: String,
     label: 'Fixture HTML',
     optional: true,
     max: 50000,
-    autoform: {rows: 8}
-  },
-  owner: {
+    autoform:
+      rows: 8
+  owner:
     type: String,
     label: 'Owner',
     optional: true,
-    autoform: {omit: true},
+    autoform:
+      omit: true
     autoValue: () ->
       return Meteor.userId()
-  },
-  rank: {
+  rank:
     type: Number,
     label: 'Rank',
     optional: true,
-    autoform: {
+    autoform:
       omit: true,
       skipInDuplicate: true
-    }
-  },
-  lastPassed: {
+  lastPassed:
     type: Boolean,
     label: 'Passed last time',
     optional: true,
-    autoform: {
+    autoform:
       omit: true,
       skipInDuplicate: true
-    }
-  },
-  hasNormative: {
+  hasNormative:
     type: Boolean,
     label: 'Has active normative',
     optional: true,
-    autoform: {
+    autoform:
       omit: true,
       skipInDuplicate: true
-    }
-  }
-}
 
 if Meteor.isServer
   CssTests._ensureIndex 'owner'
   Meteor.publish 'myCssTests', ->
-    return CssTests.find {owner: this.userId}
+    return CssTests.find
+      owner: this.userId
 
   isOwner = (userId, doc) ->
     return userId and doc.owner == userId
 
-  CssTests.allow {
+  CssTests.allow
     insert: isOwner
     update: isOwner
     remove: isOwner
-  }
+    fetch: ['owner']
 
 if Meteor.isClient
   @CssTestsHandle = Meteor.subscribe 'myCssTests'

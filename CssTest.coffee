@@ -6,7 +6,7 @@ CssTest.prototype.duplicate = (callback) ->
   schema = CssTests.simpleSchema().schema()
   newDoc = {}
   _.each schema, (field, fieldName) ->
-    if !field.autoform?.skipInDuplicate or fieldName == '_id'
+    if !field.autoform?.skipInDuplicate
       newDoc[fieldName] = self[fieldName]
   newDoc.title += ' (Copy)'
   CssTests.insert newDoc, (error, _id) ->
