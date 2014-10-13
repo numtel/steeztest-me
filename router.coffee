@@ -38,30 +38,21 @@ Router.route '/create', testCreateRoute, {
   title: 'Create New Test'
 }
 
-testDetailsRoute = () ->
-  if loggedIn.call this
-    testCase = CssTests.findOne this.params._id
-    if not testCase
-      setTitle 'Invalid case specified'
-      this.render 'error', {data: 'Invalid case specified.'}
-    else
-      setTitle _.template this.route.options.title, testCase
-      this.render 'details', {data: testCase}
-Router.route '/case/:_id', testDetailsRoute, {
+testRoute = (template) ->
+  return ->
+    if loggedIn.call this
+      testCase = CssTests.findOne this.params._id
+      if not testCase
+        setTitle 'Invalid case specified'
+        this.render 'error', {data: 'Invalid case specified.'}
+      else
+        setTitle _.template this.route.options.title, testCase
+        this.render template, {data: {test: testCase}}
+Router.route '/case/:_id', testRoute('details'), {
   name: 'test.details',
   title: '<%= title %>'
 }
-
-testModifyRoute = () ->
-  if loggedIn.call this
-    testCase = CssTests.findOne this.params._id
-    if not testCase
-      setTitle 'Invalid case specified'
-      this.render 'error', {data: 'Invalid case specified.'}
-    else
-      setTitle _.template this.route.options.title, testCase
-      this.render 'modify', {data: {test: testCase}}
-Router.route '/case/:_id/edit', testModifyRoute, {
+Router.route '/case/:_id/edit', testRoute('modify'), {
   name: 'test.modify',
   title: 'Modifying "<%= title %>"'
 }

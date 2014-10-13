@@ -1,5 +1,29 @@
 template(name="details")
-  h1= title
-  a.btn.btn-default(href="{{pathFor route='test.modify' data=this}}") Edit
-  if description
-    p= description
+  +detailsHeader(isHistory="true" test=test)
+  p I can assure you, there will be content here soon!
+
+template(name="detailsHeader")
+  #details-header
+    with test
+      .btn-group.pull-right
+        a.btn.btn-primary(href='#') Run Test
+        a.btn.btn-default(href='#') Set Normative
+        .btn-group.pull-right
+          button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+              i.glyphicon.glyphicon-cog
+              span.caret
+            ul.dropdown-menu(role='menu')
+              li
+                a(href='#') Duplicate
+              li.divider
+              li
+                a(href='#' data-toggle='modal' data-target='#delete') Delete...
+      +delete(test=this)
+      h1= title
+      if description
+        p= description
+    ul.nav.nav-tabs
+      li(class="{{#if isHistory}}active{{/if}}")
+        a(href="{{pathFor route='test.details' data=test}}") History
+      li(class="{{#if isModify}}active{{/if}}")
+        a(href="{{pathFor route='test.modify' data=test}}") Modify

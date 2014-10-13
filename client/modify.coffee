@@ -6,3 +6,13 @@ AutoForm.hooks {
       }
   }
 }
+
+Template.delete.events {
+  'click button.btn-danger': (event) ->
+    test = @test
+    deleteModal = $ '#delete'
+    deleteModal.on 'hidden.bs.modal', ->
+      CssTests.remove test._id
+      Router.go 'home'
+    deleteModal.modal 'hide'
+}

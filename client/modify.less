@@ -21,4 +21,10 @@ form#modify {
   textarea[name="fixtureHtml"]+.help-block:after {
     content: 'Only include <body> or <html> tags if needed in order to track their styles or set their attributes. Place an attribute of test-ignore to skip tracking on any element.';
   }
+
+  &+.btn {
+    float: right;
+    position: relative;
+    top: -34px;
+  }
 }

@@ -1,12 +1,29 @@
 template(name="modify")
   if test
-    with test
-      h1 Modifying "#{title}"
-    +quickForm(collection="CssTests" doc=test id="modify" type="update")
-    a(class="btn btn-default" href="{{pathFor route='test.details' data=test}}")
-      | Cancel
+    +detailsHeader(isModify="true" test=test)
+    +quickForm(collection="CssTests" doc=test id="modify" type="update" buttonContent="Save Changes")
   else
     h1 Create New Test
-    +quickForm(collection="CssTests" id="modify" type="insert")
-    a(class="btn btn-default" href="{{pathFor route='home'}}")
+    +quickForm(collection="CssTests" id="modify" type="insert" buttonContent="Save New Test")
+    a.btn.btn-default( href="{{pathFor route='home'}}")
       | Cancel
+
+template(name="delete")
+  #delete.modal.fade(tabindex='-1'
+                     role='dialog'
+                     aria-labelledby='deleteLabel'
+                     aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal')
+            span(aria-hidden='true') ×
+            span.sr-only Close
+          h4#deleteLabel.modal-title Delete Test Case
+        with test
+          .modal-body
+            | Are you sure you wish to delete '#{title}?'
+        .modal-footer
+          button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+          button.btn.btn-danger(type='button') Delete
+
