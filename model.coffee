@@ -1,11 +1,5 @@
 @CssTests = new Meteor.Collection 'CssTests'
 
-isInteger = () ->
-  if this.value == undefined or /^(-)?[0-9]+$/.test this.value
-    return true
-  else
-    return 'Must be integer.'
-
 CssTests.attachSchema new SimpleSchema {
   title: {
     type: String,
@@ -23,31 +17,84 @@ CssTests.attachSchema new SimpleSchema {
     type: Number,
     label: 'Schedule Interval',
     optional: true,
-    min: 1,
-    custom: isInteger
+    min: 1
   },
-  copies: {
-    type: Number,
-    label: 'Number of copies',
-    min: 0
-  },
-  lastExecution: {
-    type: Date,
-    label: 'Last date this book was checked out',
-    optional: true
-  },
-  summary: {
+  remoteStyles: {
     type: String,
-    label: 'Brief summary',
+    label: 'Remote Styles',
     optional: true,
-    max: 1000
+    max: 300
+  },
+  cssFiles: {
+    type: String,
+    label: 'CSS Files',
+    max: 1000,
+    optional: true,
+    autoform: {rows: 8}
+  },
+  testUrl: {
+    type: String,
+    label: 'Test URL',
+    optional: true,
+    max: 300
+  },
+  widths: {
+    type: String,
+    label: 'Test Viewport Widths',
+    max: 200,
+    defaultValue: '1024',
+    custom: () ->
+      if !/^[0-9,\s]+$/.test this.value
+        return 'notAllowed'
+  },
+  fixtureHtml: {
+    type: String,
+    label: 'Fixture HTML',
+    optional: true,
+    max: 50000,
+    autoform: {rows: 8}
+  },
+  owner: {
+    type: String,
+    label: 'Owner',
+    optional: true,
+    autoform: {omit: true},
+    autoValue: () ->
+      return Meteor.userId()
+  },
+  rank: {
+    type: Number,
+    label: 'Rank',
+    optional: true,
+    autoform: {omit: true}
+  },
+  lastPassed: {
+    type: Boolean,
+    label: 'Passed last time',
+    optional: true,
+    autoform: {omit: true}
+  },
+  hasNormative: {
+    type: Boolean,
+    label: 'Has active normative',
+    optional: true,
+    autoform: {omit: true}
   }
 }
 
 if Meteor.isServer
   Meteor.publish 'myCssTests', () ->
-    return CssTests.find {} # {owner: this.userId}
+    return CssTests.find {owner: this.userId}
+
+  isOwner = (userId, doc) ->
+    return userId and doc.owner == userId
+
+  CssTests.allow {
+    insert: isOwner
+    update: isOwner
+    remove: isOwner
+  }
 
 if Meteor.isClient
-  Meteor.subscribe 'myCssTests'
+  @CssTestsHandle = Meteor.subscribe 'myCssTests'
 

@@ -1,0 +1,5 @@
+template(name="details")
+  h1= title
+  a.btn.btn-default(href="{{pathFor route='test.modify' data=this}}") Edit
+  if description
+    p= description

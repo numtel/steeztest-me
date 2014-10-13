@@ -9,17 +9,31 @@ head
        href="/favicon.ico")
   title SteezTest.me
 
-template(name="loggingIn")
+template(name="loadingPage")
   #loading-page
     #preloader
 
 template(name="loggedInLayout")
-  .container
-    +loginButtons(align="right")
-    +yield
+  header
+    .container
+      a.logo(href="{{pathFor route='home'}}") SteezTest.me
+      +loginButtons(align="right")
+  article
+    .container
+      .col-md-3
+        +list
+      .col-md-9
+        +yield
+
+template(name="list")
+  ul.nav.nav-pills.nav-stacked
+    each cases
+      li(class="{{#if active}}active{{/if}}")
+        a(href="{{pathFor route='test.details' data=this}}"
+          title="#{title}" data-id="#{_id}")= title
 
 template(name="dashboard")
   h1 dashboard
-  a(class="btn btn-primary create-new" href="{{pathFor route='test.create'}}")
+  a.btn.btn-primary.create-new(href="{{pathFor route='test.create'}}")
     | Create New Test
 

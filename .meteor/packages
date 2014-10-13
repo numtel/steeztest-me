@@ -23,5 +23,3 @@ iron:router@1.0.0-pre3
 aldeed:collection2
 aldeed:autoform
 benjaminrh:event-hooks
-insecure
-

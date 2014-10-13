@@ -1,7 +1,12 @@
 template(name="modify")
-  h1 modifyin
-  +quickForm(collection="CssTests" id="insert-test-form" type="insert")
-  each tests
-    li #{val}
-  a(class="btn btn-default" href="{{pathFor route='home'}}")
-    | Cancel
+  if test
+    with test
+      h1 Modifying "#{title}"
+    +quickForm(collection="CssTests" doc=test id="modify" type="update")
+    a(class="btn btn-default" href="{{pathFor route='test.details' data=test}}")
+      | Cancel
+  else
+    h1 Create New Test
+    +quickForm(collection="CssTests" id="modify" type="insert")
+    a(class="btn btn-default" href="{{pathFor route='home'}}")
+      | Cancel

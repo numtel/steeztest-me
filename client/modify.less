@@ -1,0 +1,24 @@
+form#modify {
+  .help-block:after {
+    color: #737373;
+    display: block;
+  }
+  input[name="interval"]+.help-block:after {
+    content: 'Optional: Specify the number of minutes between each automated test run. You will receive an email on test failure or error.';
+  }
+  input[name="remoteStyles"]+.help-block:after {
+    content: 'Optional: Specify a URL to copy stylesheets from. (e.g. http://example.com/)';
+  }
+  textarea[name="cssFiles"]+.help-block:after {
+    content: 'Place one HREF per line to include individual stylesheets. (e.g. http://example.com/css/main.css)';
+  }
+  input[name="testUrl"]+.help-block:after {
+    content: 'Should match the protocol and server name of loaded stylesheets. Required to view which rules applied to elements.';
+  }
+  input[name="widths"]+.help-block:after {
+    content: 'Please specify a comma separated list of pixel window widths to test. A new normative will be required if this field changes.';
+  }
+  textarea[name="fixtureHtml"]+.help-block:after {
+    content: 'Only include <body> or <html> tags if needed in order to track their styles or set their attributes. Place an attribute of test-ignore to skip tracking on any element.';
+  }
+}
