@@ -1,4 +1,7 @@
-@CssTests = new Meteor.Collection 'CssTests'
+@CssTests = new Meteor.Collection 'CssTests', {
+  transform: (doc) ->
+    return new CssTest doc
+}
 
 CssTests.attachSchema new SimpleSchema {
   title: {
@@ -66,24 +69,34 @@ CssTests.attachSchema new SimpleSchema {
     type: Number,
     label: 'Rank',
     optional: true,
-    autoform: {omit: true}
+    autoform: {
+      omit: true,
+      skipInDuplicate: true
+    }
   },
   lastPassed: {
     type: Boolean,
     label: 'Passed last time',
     optional: true,
-    autoform: {omit: true}
+    autoform: {
+      omit: true,
+      skipInDuplicate: true
+    }
   },
   hasNormative: {
     type: Boolean,
     label: 'Has active normative',
     optional: true,
-    autoform: {omit: true}
+    autoform: {
+      omit: true,
+      skipInDuplicate: true
+    }
   }
 }
 
 if Meteor.isServer
-  Meteor.publish 'myCssTests', () ->
+  CssTests._ensureIndex 'owner'
+  Meteor.publish 'myCssTests', ->
     return CssTests.find {owner: this.userId}
 
   isOwner = (userId, doc) ->

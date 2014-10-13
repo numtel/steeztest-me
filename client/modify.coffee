@@ -12,7 +12,7 @@ Template.delete.events {
     test = @test
     deleteModal = $ '#delete'
     deleteModal.on 'hidden.bs.modal', ->
-      CssTests.remove test._id
+      test.remove()
       Router.go 'home'
     deleteModal.modal 'hide'
 }
