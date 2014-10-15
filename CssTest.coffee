@@ -147,7 +147,7 @@ CssTest.prototype.loadNormative = (id, callback) ->
 
   Meteor.call 'loadNormative', self._id, id, callback
   undefined
-  
+
 CssTest.prototype.run = (callback) ->
   self = this
   self.loadNormative (error, normative) ->
