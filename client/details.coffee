@@ -1,3 +1,9 @@
+
+Template.details.helpers
+  history: ->
+    return CssHistory.find
+      testCase: @test._id
+
 Template.detailsHeader.events
   'click .duplicate': (event) ->
     test = this

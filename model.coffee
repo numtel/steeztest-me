@@ -45,7 +45,6 @@ CssTests.attachSchema new SimpleSchema
   fixtureHtml:
     type: String,
     label: 'Fixture HTML',
-    optional: true,
     max: 50000,
     autoform:
       rows: 8
@@ -79,21 +78,24 @@ CssTests.attachSchema new SimpleSchema
       omit: true,
       skipInDuplicate: true
 
-if Meteor.isServer
-  CssTests._ensureIndex 'owner'
-  Meteor.publish 'myCssTests', ->
-    return CssTests.find
-      owner: this.userId
+@CssHistory = new Meteor.Collection 'CssHistory'
 
-  isOwner = (userId, doc) ->
-    return userId and doc.owner == userId
+[CssTests, CssHistory].forEach (collection) ->
+  if Meteor.isServer
+    collection._ensureIndex 'owner'
+    Meteor.publish 'my' + collection._name, ->
+      return collection.find
+        owner: this.userId
 
-  CssTests.allow
-    insert: isOwner
-    update: isOwner
-    remove: isOwner
-    fetch: ['owner']
+    isOwner = (userId, doc) ->
+      return userId and doc.owner == userId
 
-if Meteor.isClient
-  @CssTestsHandle = Meteor.subscribe 'myCssTests'
+    collection.allow
+      insert: isOwner
+      update: isOwner
+      remove: isOwner
+      fetch: ['owner']
+
+  if Meteor.isClient
+    collection.handle = Meteor.subscribe 'my' + collection._name
 

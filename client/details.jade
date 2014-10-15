@@ -1,6 +1,8 @@
 template(name="details")
   +detailsHeader(isHistory="true" test=test)
   p I can assure you, there will be content here soon!
+  each history
+    li= time
 
 template(name="detailsHeader")
   #details-header

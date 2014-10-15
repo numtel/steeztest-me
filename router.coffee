@@ -4,7 +4,7 @@ setTitle = (value) ->
   document.title = (if value then value + ' - ' else '') + titleRoot
 
 loggedIn = (loggedOut) ->
-  if Meteor.loggingIn() or !CssTestsHandle.ready()
+  if Meteor.loggingIn() or !CssTests.handle.ready()
     # Display loading page
     setTitle 'Loading'
     this.render 'loadingPage'
