@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+- "0.10"
+before_install:
+- "curl -L https://install.meteor.com | /bin/sh"
+- "meteor update"
+- "wget https://raw.github.com/numtel/tinytest-in-app/master/.startTest.js"
+- "wget https://raw.github.com/numtel/tinytest-in-app/master/.phantomRunner.js"
+script: "node .startTest.js"

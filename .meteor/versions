@@ -68,7 +68,7 @@ npm-bcrypt@0.7.7
 numtel:colorswap@1.0.2
 numtel:phantomjs-persistent-server@0.0.5
 numtel:tinytest-fixture-account@0.0.1
-numtel:tinytest-in-app@0.0.2
+numtel:tinytest-in-app@0.0.3
 oauth2@1.1.1
 oauth@1.1.1
 observe-sequence@1.0.3
