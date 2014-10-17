@@ -6,4 +6,6 @@ before_install:
 - "meteor update"
 - "wget https://raw.github.com/numtel/tinytest-in-app/master/.startTest.js"
 - "wget https://raw.github.com/numtel/tinytest-in-app/master/.phantomRunner.js"
+# Optionally, arguments can be added to Meteor startup
+# ex: node .startTest.js --port 3500
 script: "node .startTest.js"
