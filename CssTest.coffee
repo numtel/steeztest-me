@@ -71,7 +71,7 @@ CssTest.prototype.getHtml = (options, callback) ->
   head = [
     '<head>',
     styleSheets,
-    (if self.testUrl then '<base href="' + self.testUrl +'">' else ''),
+    (if self.testUrl then '<base href="' + self.testUrl + '">' else ''),
     '<style>',
     '.steez-highlight-failure { outline: 2px solid #ff0 !important; }',
     '</style>',

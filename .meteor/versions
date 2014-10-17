@@ -26,7 +26,6 @@ ejson@1.0.4
 email@1.0.4
 fastclick@1.0.1
 follower-livedata@1.0.2
-gadicohen:phantomjs@0.0.2
 geojson-utils@1.0.1
 github@1.1.1
 google@1.1.1
@@ -66,9 +65,9 @@ natestrauser:bootstrap-colorpicker@0.1.1
 natestrauser:jquery-scrollto@1.4.7
 npm-bcrypt@0.7.7
 numtel:colorswap@1.0.2
-numtel:phantomjs-persistent-server@0.0.5
+numtel:phantomjs-persistent-server@0.0.8
 numtel:tinytest-fixture-account@0.0.1
-numtel:tinytest-in-app@0.0.3
+numtel:tinytest-in-app@0.0.5
 oauth2@1.1.1
 oauth@1.1.1
 observe-sequence@1.0.3

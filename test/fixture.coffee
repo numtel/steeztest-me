@@ -7,7 +7,8 @@
   data = _.defaults data || {},
     title: 'Test Test'
     widths: '1024,720'
-    fixtureHtml: '<h1>hello</h1>'
+    cssFiles: 'http://test.com/sample.css   \n  http://florp.snorb/spink.css'
+    fixtureHtml: '<h1>hello, <em>world!</em></h1>'
   CssTests.insert data, (error, _id) ->
     if error
       callback? error
